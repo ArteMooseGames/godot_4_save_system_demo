@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkttcuboq60rr"]
+
+[ext_resource type="PackedScene" uid="uid://c5fsyvwxo2fo0" path="res://scenes/wall.tscn" id="1_l54p6"]
+[ext_resource type="PackedScene" uid="uid://cc4jsl14hg3qh" path="res://scenes/player.tscn" id="2_l48mj"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="WallLeft" parent="Walls" instance=ExtResource("1_l54p6")]
+
+[node name="WallRight" parent="Walls" instance=ExtResource("1_l54p6")]
+position = Vector2(1112, 0)
+
+[node name="WallTop" parent="Walls" instance=ExtResource("1_l54p6")]
+position = Vector2(1128, -3.63798e-12)
+rotation = 1.5708
+scale = Vector2(1, 1.7)
+
+[node name="WallBottom" parent="Walls" instance=ExtResource("1_l54p6")]
+position = Vector2(1128, 608)
+rotation = 1.5708
+scale = Vector2(1, 1.7)
+
+[node name="Player" parent="." instance=ExtResource("2_l48mj")]
+position = Vector2(104, 104)
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Hazards" type="Node" parent="."]
