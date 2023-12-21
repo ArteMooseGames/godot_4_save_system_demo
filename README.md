@@ -4,7 +4,7 @@
 
 # Overview
 This is a binary serialization/deserialization game save system developed by drawing inspiration from the tutorials below. 
-We had a lot of trouble finding a clear example of a moderately complex save system, so I [Aaron](https://github.com/ajsams) made this one!
+We had a lot of trouble finding a clear example of a moderately complex save system, so I [(Aaron)](https://github.com/ajsams) made this one!
 
 At the bottom of this file you will also find an implementation of a non-binary save system just in case that helps you to understand how this one works.
 
