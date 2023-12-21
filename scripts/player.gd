@@ -1,5 +1,7 @@
 extends CharacterBody2D
+class_name Player
 
+signal player_died
 
 const SPEED = 400.0
 
@@ -23,3 +25,9 @@ func _physics_process(delta):
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
+
+
+
+
+func _on_damage_hitbox_area_entered(area):
+	emit_signal("player_died")

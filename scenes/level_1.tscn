@@ -1,14 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkttcuboq60rr"]
+[gd_scene load_steps=6 format=3 uid="uid://bkttcuboq60rr"]
 
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_c5m2s"]
 [ext_resource type="PackedScene" uid="uid://c5fsyvwxo2fo0" path="res://scenes/wall.tscn" id="1_l54p6"]
 [ext_resource type="PackedScene" uid="uid://cc4jsl14hg3qh" path="res://scenes/player.tscn" id="2_l48mj"]
+[ext_resource type="PackedScene" uid="uid://cpvtvjxweodu6" path="res://scenes/coin.tscn" id="3_c6i54"]
+[ext_resource type="PackedScene" uid="uid://c4uvfq704o7fw" path="res://scenes/hazard.tscn" id="4_a1kxa"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_c5m2s")
 
 [node name="Background" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1152, 648)
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="PlayerStartMarker" type="Marker2D" parent="."]
+position = Vector2(104, 104)
 
 [node name="Walls" type="Node" parent="."]
 
@@ -32,4 +39,29 @@ position = Vector2(104, 104)
 
 [node name="Coins" type="Node" parent="."]
 
+[node name="Coin" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(720, 168)
+currency_type = "star"
+
+[node name="Coin2" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(392, 128)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(896, 504)
+currency_type = "star"
+
+[node name="Coin4" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(304, 520)
+currency_type = "star"
+
+[node name="Coin5" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(688, 464)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(200, 304)
+currency_type = "star"
+
 [node name="Hazards" type="Node" parent="."]
+
+[node name="Hazard" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(528, 344)
