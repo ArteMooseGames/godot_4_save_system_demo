@@ -1,15 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc4jsl14hg3qh"]
+[gd_scene load_steps=9 format=3 uid="uid://cc4jsl14hg3qh"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ahb01"]
-[ext_resource type="Texture2D" uid="uid://cooi8b64ff3y5" path="res://icon.svg" id="2_kc4yw"]
+[ext_resource type="Texture2D" uid="uid://cu1opobxq3rde" path="res://assets/player-sheet.png" id="2_hw8y3"]
+
+[sub_resource type="Animation" id="Animation_62kyn"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_due2k"]
+resource_name = "run"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_sqr4i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_24mqd"]
+_data = {
+"RESET": SubResource("Animation_sqr4i"),
+"idle": SubResource("Animation_62kyn"),
+"run": SubResource("Animation_due2k")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ghsw"]
-radius = 64.0
-height = 128.0
+height = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m64go"]
-radius = 59.0
-height = 122.0
+height = 62.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -17,12 +70,19 @@ collision_mask = 13
 script = ExtResource("1_ahb01")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_kc4yw")
+texture_filter = 1
+texture = ExtResource("2_hw8y3")
+hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_24mqd")
+}
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 4)
 shape = SubResource("CapsuleShape2D_4ghsw")
 
 [node name="DamageHitbox" type="Area2D" parent="."]
@@ -30,6 +90,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
+position = Vector2(3, 4)
 shape = SubResource("CapsuleShape2D_m64go")
 
 [connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]

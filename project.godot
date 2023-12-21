@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 SaveLoad="*res://scripts/globals/save_load.gd"
 Globals="*res://scripts/globals/globals.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [input]
 
 move_up={

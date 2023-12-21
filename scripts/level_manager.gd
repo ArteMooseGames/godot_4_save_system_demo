@@ -6,7 +6,6 @@ extends Node2D
 func _ready():
 	player.player_died.connect(_on_player_died)
 	
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,10 +24,12 @@ func _on_player_died():
 # 	Levels (1 & 2)
 # 	Player
 # 	Coins (2 types)
-# 	Hazards (1 type)
+# 	Hazards (1 type) lots of these so the point is to move around and get coins without dying
+# 	End portal (takes you to next level, or success screen)
 # 	HUD (Shows lives and currency)
 # 	Pause menu (Reset game, Quit to title)
 # 	Title (Start Game, Credits)
+# 	You won! screen.
 
 # Track
 # 	Player Lives
