@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dyefd4b4ec4rv" path="res://assets/hazard.png" id="2_mcv7g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v817c"]
+radius = 12.0
+height = 28.0
 
 [node name="Hazard" type="Area2D"]
 collision_layer = 4

@@ -1,7 +1,7 @@
 extends Area2D
 
 @export_group("My Properties")
-@export_enum("star", "diamond") var currency_type: String = "diamond"
+@export_enum("star", "diamond") var coin_type: String = "diamond"
 
 @onready var star_texture: String = "res://assets/coin_star.png"
 @onready var diamond_texture: String = "res://assets/coin_diamond.png"
@@ -14,7 +14,7 @@ extends Area2D
 
 
 func _ready():
-	$Sprite2D.texture = load(type_to_texture[currency_type])
+	$Sprite2D.texture = load(type_to_texture[coin_type])
 
 
 func _on_body_entered(body):
@@ -23,11 +23,11 @@ func _on_body_entered(body):
 		queue_free()
 
 
-func _increment_currency_count():
-	if !Globals.coin_counter.has(currency_type):
-		Globals.coin_counter[currency_type] = 0
-	Globals.coin_counter[currency_type] += 1
+func _increment_coin_count():
+	if !Globals.coin_counter.has(coin_type):
+		Globals.coin_counter[coin_type] = 0
+	Globals.coin_counter[coin_type] += 1
 
 
 func _pickup():
-	_increment_currency_count()
+	_increment_coin_count()

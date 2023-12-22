@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkttcuboq60rr"]
+[gd_scene load_steps=9 format=3 uid="uid://bkttcuboq60rr"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_c5m2s"]
 [ext_resource type="PackedScene" uid="uid://c5fsyvwxo2fo0" path="res://scenes/wall.tscn" id="1_l54p6"]
 [ext_resource type="PackedScene" uid="uid://cc4jsl14hg3qh" path="res://scenes/player.tscn" id="2_l48mj"]
 [ext_resource type="PackedScene" uid="uid://cpvtvjxweodu6" path="res://scenes/coin.tscn" id="3_c6i54"]
+[ext_resource type="PackedScene" uid="uid://snjlxqbxk8mg" path="res://scenes/menus/hud.tscn" id="3_ldcr3"]
 [ext_resource type="PackedScene" uid="uid://c4uvfq704o7fw" path="res://scenes/hazard.tscn" id="4_a1kxa"]
+[ext_resource type="PackedScene" uid="uid://qcftcw4yy6tj" path="res://scenes/end_door.tscn" id="6_18hhj"]
+[ext_resource type="PackedScene" uid="uid://dj3qurhtkkxap" path="res://scenes/menus/popup.tscn" id="8_63ci5"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_c5m2s")
@@ -13,9 +16,6 @@ script = ExtResource("1_c5m2s")
 custom_minimum_size = Vector2(1152, 648)
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="PlayerStartMarker" type="Marker2D" parent="."]
-position = Vector2(104, 104)
 
 [node name="Walls" type="Node" parent="."]
 
@@ -34,34 +34,216 @@ position = Vector2(1128, 608)
 rotation = 1.5708
 scale = Vector2(1, 1.7)
 
+[node name="HUD" parent="." instance=ExtResource("3_ldcr3")]
+
+[node name="PlayerStartMarker" type="Marker2D" parent="."]
+position = Vector2(104, 104)
+
 [node name="Player" parent="." instance=ExtResource("2_l48mj")]
 position = Vector2(104, 104)
 
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("3_c6i54")]
-position = Vector2(720, 168)
-currency_type = "star"
+position = Vector2(72, 344)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("3_c6i54")]
-position = Vector2(392, 128)
+position = Vector2(232, 96)
 
 [node name="Coin3" parent="Coins" instance=ExtResource("3_c6i54")]
-position = Vector2(896, 504)
-currency_type = "star"
+position = Vector2(88, 584)
 
 [node name="Coin4" parent="Coins" instance=ExtResource("3_c6i54")]
-position = Vector2(304, 520)
-currency_type = "star"
+position = Vector2(232, 560)
 
 [node name="Coin5" parent="Coins" instance=ExtResource("3_c6i54")]
-position = Vector2(688, 464)
+position = Vector2(376, 88)
+coin_type = "star"
 
 [node name="Coin6" parent="Coins" instance=ExtResource("3_c6i54")]
-position = Vector2(200, 304)
-currency_type = "star"
+position = Vector2(416, 384)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(632, 352)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(720, 440)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(728, 576)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("3_c6i54")]
+position = Vector2(1080, 408)
 
 [node name="Hazards" type="Node" parent="."]
 
 [node name="Hazard" parent="Hazards" instance=ExtResource("4_a1kxa")]
-position = Vector2(528, 344)
+position = Vector2(160, 72)
+
+[node name="Hazard12" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(160, 128)
+
+[node name="Hazard2" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(72, 176)
+
+[node name="Hazard3" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(160, 176)
+
+[node name="Hazard4" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(352, 152)
+
+[node name="Hazard5" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(296, 96)
+
+[node name="Hazard6" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(72, 464)
+
+[node name="Hazard7" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(232, 200)
+
+[node name="Hazard8" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(72, 400)
+
+[node name="Hazard9" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(208, 272)
+
+[node name="Hazard10" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(72, 288)
+
+[node name="Hazard11" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(72, 232)
+
+[node name="Hazard13" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(72, 520)
+
+[node name="Hazard14" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(168, 584)
+
+[node name="Hazard15" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(168, 504)
+
+[node name="Hazard16" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(168, 416)
+
+[node name="Hazard17" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(232, 416)
+
+[node name="Hazard18" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(232, 472)
+
+[node name="Hazard19" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(296, 584)
+
+[node name="Hazard20" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(344, 256)
+
+[node name="Hazard21" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(344, 312)
+
+[node name="Hazard22" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(344, 376)
+
+[node name="Hazard23" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(384, 448)
+
+[node name="Hazard24" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(416, 512)
+
+[node name="Hazard25" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(480, 512)
+
+[node name="Hazard26" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(464, 440)
+
+[node name="Hazard27" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(408, 312)
+
+[node name="Hazard28" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(432, 200)
+
+[node name="Hazard29" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(448, 120)
+
+[node name="Hazard30" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(712, 72)
+
+[node name="Hazard31" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(712, 128)
+
+[node name="Hazard32" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(712, 192)
+
+[node name="Hazard33" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(712, 256)
+
+[node name="Hazard34" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(768, 296)
+
+[node name="Hazard35" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(832, 296)
+
+[node name="Hazard36" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(896, 296)
+
+[node name="Hazard37" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(960, 296)
+
+[node name="Hazard38" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(1024, 296)
+
+[node name="Hazard39" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(1088, 296)
+
+[node name="Hazard40" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(512, 200)
+
+[node name="Hazard41" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(600, 200)
+
+[node name="Hazard42" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(600, 200)
+
+[node name="Hazard43" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(752, 496)
+
+[node name="Hazard49" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(808, 440)
+
+[node name="Hazard50" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(856, 416)
+
+[node name="Hazard51" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(896, 576)
+
+[node name="Hazard52" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(840, 576)
+
+[node name="Hazard53" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(976, 488)
+
+[node name="Hazard54" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(1040, 472)
+
+[node name="Hazard55" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(1096, 496)
+
+[node name="Hazard44" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(568, 360)
+
+[node name="Hazard45" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(624, 432)
+
+[node name="Hazard46" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(672, 496)
+
+[node name="Hazard47" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(712, 336)
+
+[node name="Hazard48" parent="Hazards" instance=ExtResource("4_a1kxa")]
+position = Vector2(672, 384)
+
+[node name="EndDoor" parent="." instance=ExtResource("6_18hhj")]
+position = Vector2(1048, 552)
+
+[node name="Popup" parent="." instance=ExtResource("8_63ci5")]
+visible = false

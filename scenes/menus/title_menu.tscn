@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://fse4du575dm4"]
+
+[ext_resource type="Script" path="res://scripts/menus/title_menu.gd" id="1_okoto"]
+[ext_resource type="Theme" uid="uid://mf7q1nvgel6c" path="res://game_theme.tres" id="1_vkea2"]
+
+[node name="TitleMenu" type="CanvasLayer"]
+script = ExtResource("1_okoto")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -12.0
+offset_right = 280.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGameButton" type="Button" parent="ColorRect/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_vkea2")
+text = "Start New Game"
+
+[node name="ContinueButton" type="Button" parent="ColorRect/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_vkea2")
+text = "Continue From Save"
+
+[node name="TitleLabel" type="Label" parent="ColorRect/ColorRect"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = -48.0
+offset_right = 967.0
+offset_bottom = 177.0
+theme = ExtResource("1_vkea2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 81
+text = "Coin Grab
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MadeByLabel" type="Label" parent="ColorRect/ColorRect"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 1104.0
+offset_bottom = 276.0
+theme = ExtResource("1_vkea2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Made in Godot 4.2 by Artemoose Games to demonstrate a slightly more complicated save/load system!
+(https://artemoose.itch.io)"
+horizontal_alignment = 1
+autowrap_mode = 2
