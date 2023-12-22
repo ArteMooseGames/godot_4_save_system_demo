@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0pedeon773oi"]
+[gd_scene load_steps=9 format=3 uid="uid://c0pedeon773oi"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_ul3x6"]
 [ext_resource type="PackedScene" uid="uid://c5fsyvwxo2fo0" path="res://scenes/wall.tscn" id="2_lyfnq"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cpvtvjxweodu6" path="res://scenes/coin.tscn" id="4_0e4nk"]
 [ext_resource type="PackedScene" uid="uid://c4uvfq704o7fw" path="res://scenes/hazard.tscn" id="5_kdhvk"]
 [ext_resource type="PackedScene" uid="uid://qcftcw4yy6tj" path="res://scenes/end_door.tscn" id="6_j7q2y"]
+[ext_resource type="PackedScene" uid="uid://dj3qurhtkkxap" path="res://scenes/menus/popup.tscn" id="8_o1fca"]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_ul3x6")
@@ -297,3 +298,6 @@ position = Vector2(1096, 312)
 
 [node name="EndDoor" parent="." instance=ExtResource("6_j7q2y")]
 position = Vector2(496, 328)
+
+[node name="Popup" parent="." instance=ExtResource("8_o1fca")]
+visible = false
