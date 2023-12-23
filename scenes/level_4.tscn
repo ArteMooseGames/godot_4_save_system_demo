@@ -70,10 +70,10 @@ position = Vector2(280, 208)
 
 [node name="Coin5" parent="Coins" instance=ExtResource("4_pfv3i")]
 position = Vector2(448, 496)
+coin_type = "star"
 
 [node name="Coin2" parent="Coins" instance=ExtResource("4_pfv3i")]
 position = Vector2(88, 504)
-coin_type = "star"
 
 [node name="Hazards" type="Node" parent="."]
 

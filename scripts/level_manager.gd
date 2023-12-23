@@ -31,7 +31,6 @@ func _process(_delta):
 	hud.update_diamond_label(Globals.coin_counter["diamond"])
 
 
-
 func _pause() -> void:
 	player.can_move = false
 	var pause_menu: Object = PauseMenu.instantiate()
@@ -46,7 +45,6 @@ func _unpause() -> void:
 
 func _restart_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/level_1.tscn")
-
 
 
 func _on_player_died() -> void:

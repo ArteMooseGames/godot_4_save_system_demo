@@ -5,8 +5,6 @@ extends Area2D
 
 @onready var star_texture: String = "res://assets/coin_star.png"
 @onready var diamond_texture: String = "res://assets/coin_diamond.png"
-
-
 @onready var type_to_texture: Dictionary = {
 	"star": star_texture,
 	"diamond": diamond_texture,

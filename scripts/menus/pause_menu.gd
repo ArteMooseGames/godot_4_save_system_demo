@@ -8,7 +8,6 @@ signal restart_game
 @onready var restart_button: Button = $ColorRect/ColorRect/VBoxContainer/RestartButton
 
 
-
 func _ready():
 	back_button.grab_focus()
 	back_button.pressed.connect(_on_back_button_pressed)

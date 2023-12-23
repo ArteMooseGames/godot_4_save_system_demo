@@ -1,33 +1,32 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 signal player_died
+
+const SPEED: float = 200.0
+
+var can_move: bool = false
+var _direction: Vector2 = Vector2.ZERO
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
-const speed: float = 200.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var direction: Vector2 = Vector2.ZERO
-var can_move: bool = false
-
 
 func _physics_process(_delta):
 	if can_move:
-		direction = Vector2.ZERO
+		_direction = Vector2.ZERO
 		# Get input
 		if Input.is_action_pressed("move_right"):
-			direction.x += 1
+			_direction.x += 1
 		if Input.is_action_pressed("move_left"):
-			direction.x -= 1
+			_direction.x -= 1
 		if Input.is_action_pressed("move_down"):
-			direction.y += 1
+			_direction.y += 1
 		if Input.is_action_pressed("move_up"):
-			direction.y -= 1 
-		direction = direction.normalized()
-		if direction:
-			velocity = direction * speed
+			_direction.y -= 1 
+		_direction = _direction.normalized()
+		if _direction:
+			velocity = _direction * SPEED
 		else:
 			velocity = Vector2.ZERO
 		_handle_anims()

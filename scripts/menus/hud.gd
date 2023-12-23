@@ -6,7 +6,6 @@ extends CanvasLayer
 @onready var diamond_label: Label = $VBoxContainer/DiamondLabel
 
 
-
 func update_level_label(level_name: String) -> void:
 	level_label.text = level_name.left(5) + " " + level_name.right(1)
 
