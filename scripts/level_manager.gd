@@ -49,17 +49,17 @@ func _restart_game() -> void:
 
 func _on_player_died() -> void:
 	player.can_move = false
+	Globals.player_position = player_start.global_position  # Player goes back to start
 	if Globals.player_lives >= 2:
 		Globals.player_lives -= 1
+		SaveLoad.save_game(name)
+		get_tree().call_deferred("reload_current_scene")
 	else:
 		popup_label.text = "Oops...\nYou ran out of lives."
 		SaveLoad.clear_save()
 		popup.visible = true
 		await get_tree().create_timer(2).timeout
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/level_1.tscn")
-	Globals.player_position = player_start.global_position  # Player goes back to start
-	SaveLoad.save_game(name)
-	get_tree().call_deferred("reload_current_scene")
 
 
 func _on_level_finished() -> void :
