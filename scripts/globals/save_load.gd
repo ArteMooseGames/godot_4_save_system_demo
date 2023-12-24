@@ -40,7 +40,7 @@ func _get_level_filepath(level_name: String):
 func _open_file(access : FileAccess.ModeFlags, filepath: String) -> int:
 	# Try opening an encrypted file with write access
 	_s_file = FileAccess.open_encrypted_with_pass(filepath, access, _password)
-	# Return the assigned file index (handle)
+	# Handle errors if the file doesn't exist yet, this is necessary
 	return FileAccess.get_open_error() if (_s_file == null) else OK
 	
 	
