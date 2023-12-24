@@ -29,3 +29,22 @@ func _increment_coin_count():
 
 func _pickup():
 	_increment_coin_count()
+
+
+func save_data() -> Dictionary:
+	var save_dict: Dictionary = {
+		"filepath": get_scene_file_path(),
+		"parent": get_parent().get_path(),
+		"name": name,
+		"pos_x": global_position.x,
+		"pos_y": global_position.y,
+		"coin_type": coin_type,
+	}
+	return save_dict
+
+
+func load_data(data: Dictionary) -> void:
+	name = data["name"]
+	position.x = data["pos_x"]
+	position.y = data["pos_y"]
+	coin_type = data["coin_type"]
