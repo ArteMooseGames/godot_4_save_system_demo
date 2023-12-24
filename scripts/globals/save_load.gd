@@ -26,20 +26,10 @@ func clear_save():
 	DirAccess.remove_absolute(_globals_filepath)
 	for level_name in Globals.levels:
 		DirAccess.remove_absolute(_get_level_filepath(level_name))
-	Globals.current_level = "Level1"
-	Globals.player_lives = 5
-	Globals.player_position = Vector2(104, 104)  # This is the starting position on a new map
-	Globals.coin_counter = {
-		"star": 0,
-		"diamond": 0,
-	}
-	Globals.points_per_level = {
-		"Level1": 0,
-		"Level2": 0,
-		"Level3": 0,
-		"Level4": 0,
-		"Level5": 0,
-	}
+	
+	for key in Globals.default_global_values.keys():
+		if key in Globals:
+			Globals.set(key, Globals.default_global_values[key])
 
 
 # Private file path and I/O methods
@@ -88,7 +78,6 @@ func _serialize_globals() -> void:
 	_s_file.store_32(Globals.player_position.x)
 	_s_file.store_32(Globals.player_position.y)
 	_s_file.store_pascal_string(JSON.stringify(Globals.coin_counter))
-	_s_file.store_pascal_string(JSON.stringify(Globals.points_per_level))
 
 
 func _deserialize_globals() -> void:
@@ -96,7 +85,6 @@ func _deserialize_globals() -> void:
 	Globals.player_lives = _s_file.get_32()
 	Globals.player_position = Vector2(_s_file.get_32(), _s_file.get_32())
 	Globals.coin_counter = JSON.parse_string(_s_file.get_pascal_string())
-	Globals.points_per_level = JSON.parse_string(_s_file.get_pascal_string())
 
 
 func _serialize_node(node) -> void:

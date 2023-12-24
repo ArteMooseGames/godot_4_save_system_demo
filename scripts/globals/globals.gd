@@ -34,11 +34,12 @@ var coin_counter: Dictionary = {
 	"star": 0,
 	"diamond": 0,
 }
-
-var points_per_level: Dictionary = {
-	"Level1": 0,
-	"Level2": 0,
-	"Level3": 0,
-	"Level4": 0,
-	"Level5": 0,
+var default_global_values: Dictionary = {
+	"current_level": "Level1",
+	"player_lives": 5,
+	"player_position": Vector2(104, 104),
+	"coin_counter": {
+		"star": 0,
+		"diamond": 0,
+	},
 }
