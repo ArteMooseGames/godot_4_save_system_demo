@@ -72,6 +72,8 @@ func _load_globals():
 	_close_file()
 
 
+# When serializing and deserializing, the order in which you save variables to the save file
+#	must be preserved when reading the file back into Global variables.
 func _serialize_globals() -> void:
 	_s_file.store_pascal_string(Globals.current_level)
 	_s_file.store_32(Globals.player_lives)
@@ -87,12 +89,14 @@ func _deserialize_globals() -> void:
 	Globals.coin_counter = JSON.parse_string(_s_file.get_pascal_string())
 
 
+
 func _serialize_node(node) -> void:
 	# This function serializes any nodes in the group "persist"
 	# Some tutorials create specific serialize/deserialize functions for each node.
 	#	but for slightly, but not overly complex games, I find this a tractable way to 
 	#	store save data
 	# Filepath, Parent, Name, and Position are stored for every persisted node.
+	# The order used here must be the same order that variables are read in _deserialize_nodes().
 	_s_file.store_pascal_string(node.get_scene_file_path())  # Always store scene path first so you can use this to deserialize
 	_s_file.store_pascal_string(node.get_parent().get_path()) # Always store scene parent second so that new object can be created
 	_s_file.store_pascal_string(node.name)
