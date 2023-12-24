@@ -56,7 +56,8 @@ func _save_globals():
 		print("Unable to open the file %s. Received error: %d" % [_globals_filepath, status])
 		return
 	# Serialize data to file
-	_serialize_globals()
+	var save_data: Dictionary = Globals.save_data()
+	_s_file.store_var(save_data)
 	# Close the file
 	_close_file()
 
@@ -67,80 +68,34 @@ func _load_globals():
 	if (status != OK): 
 		print("Unable to open the file %s. Received error: %d" % [_globals_filepath, status])
 		return
-	_deserialize_globals()
+	var loaded_data: Dictionary = _s_file.get_var()
+	Globals.load_data(loaded_data)
 	# Close the file
 	_close_file()
 
 
-# When serializing and deserializing, the order in which you save variables to the save file
-#	must be preserved when reading the file back into Global variables.
-func _serialize_globals() -> void:
-	_s_file.store_pascal_string(Globals.current_level)
-	_s_file.store_32(Globals.player_lives)
-	_s_file.store_32(Globals.player_position.x)
-	_s_file.store_32(Globals.player_position.y)
-	_s_file.store_pascal_string(JSON.stringify(Globals.coin_counter))
-
-
-func _deserialize_globals() -> void:
-	Globals.current_level = _s_file.get_pascal_string()
-	Globals.player_lives = _s_file.get_32()
-	Globals.player_position = Vector2(_s_file.get_32(), _s_file.get_32())
-	Globals.coin_counter = JSON.parse_string(_s_file.get_pascal_string())
-
-
-
-func _serialize_node(node) -> void:
-	# This function serializes any nodes in the group "persist"
-	# Some tutorials create specific serialize/deserialize functions for each node.
-	#	but for slightly, but not overly complex games, I find this a tractable way to 
-	#	store save data
-	# Filepath, Parent, Name, and Position are stored for every persisted node.
-	# The order used here must be the same order that variables are read in _deserialize_nodes().
-	_s_file.store_pascal_string(node.get_scene_file_path())  # Always store scene path first so you can use this to deserialize
-	_s_file.store_pascal_string(node.get_parent().get_path()) # Always store scene parent second so that new object can be created
-	_s_file.store_pascal_string(node.name)
-	_s_file.store_float(node.global_position.x)
-	_s_file.store_float(node.global_position.y)
-	
-	# Some nodes may have additional attributes.
-	if node.get_scene_file_path() == "res://scenes/coin.tscn":
-		_s_file.store_pascal_string(node.coin_type)
-
-
-func _deserialize_nodes() -> void: 
-	# Here we are deserializing all nodes by unpacking the level save file
-	while _s_file.get_position() < _s_file.get_length():
-		# We will first retrieve shared attributes for all nodes.
-		var node_filepath = _s_file.get_pascal_string()
-		var node_parent = _s_file.get_pascal_string()
-		var new_object = load(node_filepath).instantiate()
-		new_object.name = _s_file.get_pascal_string()
-		new_object.global_position = Vector2(_s_file.get_float(), _s_file.get_float())
-		
-		# Then for any nodes with additional stored attributes, unpack those.
-		if node_filepath == "res://scenes/coin.tscn":
-			new_object.coin_type = _s_file.get_pascal_string()
-
-		# Now that all properties of the node are unpacked and assigned 
-		#  add the node to the parent scene.
-		get_node(node_parent).add_child(new_object)  
-
-
 func _save_level(level_name: String):
+	# This function serializes any nodes in the group "persist"
 	# For this game, we don't actually need to save each level individually. But, I have structured
 	#	things this way to illustrate how you might save things in a game where you can reenter
 	#	multiple levels and want to preserve the state of a previous playthrough (for example, 
 	#	in a game like Super Mario 3).
+	
 	# Open and check file
 	var status = _open_file(FileAccess.WRITE, _get_level_filepath(level_name))
 	if (status != OK): 
 		print("Unable to open the file %s. Received error: %d" % [_get_level_filepath(level_name), status])
 		return
 
+	# We are using the group "persist" to tell the save system which nodes should be saved and loaded.
 	var save_nodes = get_tree().get_nodes_in_group("persist")
 	for node in save_nodes:
-		_serialize_node(node)
+		# Every persisted node must have a "load_data()" function.
+		# The resulting dictionary must include at least: 
+			# "filepath" - (get_scene_file_path()) and 
+			# "parent" - (get_parent().get_path())
+		var save_data: Dictionary = node.save_data()
+		_s_file.store_var(save_data)
 	_close_file()
 
 
@@ -150,11 +105,21 @@ func _load_level(level_name: String):
 	if (status != OK): 
 		print("Unable to open the file %s. Received error: %d" % [_get_level_filepath(level_name), status])
 		return
-	var save_nodes = get_tree().get_nodes_in_group("persist")  # Any nodes here must be serialized in serialize_node and deserialized in deserialize_nodes
+	
+	# We are using the group "persist" to tell the save system which nodes should be saved and loaded.
+	var save_nodes = get_tree().get_nodes_in_group("persist")  
 	
 	# For all persisted node types, we need to remove all instances from the game before 
 	#	loading saved versions
 	for node in save_nodes:
 		node.queue_free()
-	_deserialize_nodes()
+	
+	# Here we are deserializing all nodes by unpacking one node dict at a time with "get_var()"
+	while _s_file.get_position() < _s_file.get_length():
+		var loaded_data: Dictionary = _s_file.get_var()
+		var new_object = load(loaded_data["filepath"]).instantiate()
+		
+		# Every persisted node must have a "load_data()" function.
+		new_object.load_data(loaded_data)
+		get_node(loaded_data["parent"]).add_child(new_object)
 	_close_file()

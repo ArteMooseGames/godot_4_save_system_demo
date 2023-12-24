@@ -11,8 +11,6 @@ For example, I was working on a game that had a single currency scene that could
 
 By no means do I think this is comprehensive or will work for very complex games, but my hope is that this might help a few others to adapt this to their needs.
 
-For much more complex games, as the Godot tutorial linked below mentions, you would probably need to build a more complicated system that takes more direct advantage of the Binary Serialization API. **If anyone reading this knows of some good open source examples of that, please comment on this project and let us know of them**, as we'd love to reference them here and potentially improve on this project with more examples of different types of save systems. 
-
 This type of save system can be extended in various ways, including adding multiple save slots (by adjusting the paths for level save files).
 
 # The Game
@@ -35,7 +33,7 @@ You can demo the save system by utilizing the in-game save function in the pause
 If you are playing from Godot and you encounter strange behavior after closing the game mid-way, returning to the title menu and selecting "Start New Game" should clear the save files and start a fresh game. 
 
 # The Save/Load System
-The save system uses the Binary Serialization API via Godot's `FileAccess` class. It works by storing data in two types of files:
+The save system uses the Binary Serialization API via Godot's [`FileAccess`](https://docs.godotengine.org/en/stable/classes/class_fileaccess.html) class. It works by storing data in two types of files:
 
 1. Globals - Global variables that are stored in game in the `Globals` singleton.
 2. Level Saves - Data for each level is saved for any scenes added to the `persist` group. This currently includes only `coin.tscn`. However, this could be adapted to include additional scenes. 
@@ -46,7 +44,7 @@ The Globals serialization/deserialization is fairly straightforward. It stores a
 
 The Levels save files work similarly, however, when deserializing you have to first get the path to the scene and its parent, instantiate the node object, then set it's properties. 
 
-# Links
+# Relevant Links
 * [Godot Binary Serialization API](https://docs.godotengine.org/en/stable/tutorials/io/binary_serialization_api.html#doc-binary-serialization-api)
 * [Godot FileAccess Docs](https://docs.godotengine.org/en/stable/classes/class_fileaccess.html)
 * [Godot Save/Load tutorial](https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html)

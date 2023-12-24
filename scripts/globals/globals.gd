@@ -43,3 +43,23 @@ var default_global_values: Dictionary = {
 		"diamond": 0,
 	},
 }
+
+
+# SAVING AND LOADING DATA FUNCTIONS
+func save_data() -> Dictionary:
+	var save_dict: Dictionary = {
+		"current_level": current_level,
+		"player_lives": player_lives,
+		"player_pos_x": player_position.x,
+		"player_pos_y": player_position.y,
+		"coin_counter": coin_counter,
+	}
+	return save_dict
+
+
+func load_data(data: Dictionary) -> void:
+	current_level = data["current_level"]
+	player_lives = data["player_lives"]
+	player_position.x = data["player_pos_x"]
+	player_position.y = data["player_pos_y"]
+	coin_counter = data["coin_counter"]
