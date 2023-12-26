@@ -42,7 +42,7 @@ In contrast to some other Godot tutorials that use save/load functions within ea
 
 The Globals serialization/deserialization is fairly straightforward. It stores and loads objects explicitly, in a specific order.
 
-The Levels save files work similarly, however, when deserializing you have to first get the path to the scene and its parent, instantiate the node object, then set it's properties. 
+The Levels save files work similarly, however, when deserializing you have to first get the path to the scene and its parent, instantiate the node object, then set its properties. 
 
 # Relevant Links
 * [Godot Binary Serialization API](https://docs.godotengine.org/en/stable/tutorials/io/binary_serialization_api.html#doc-binary-serialization-api)
