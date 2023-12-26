@@ -146,9 +146,6 @@ position = Vector2(384, 200)
 [node name="Hazard33" parent="Hazards" instance=ExtResource("5_owtfu")]
 position = Vector2(416, 200)
 
-[node name="Hazard37" parent="Hazards" instance=ExtResource("5_owtfu")]
-position = Vector2(544, 200)
-
 [node name="Hazard38" parent="Hazards" instance=ExtResource("5_owtfu")]
 position = Vector2(576, 200)
 
