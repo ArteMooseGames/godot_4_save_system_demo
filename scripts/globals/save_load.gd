@@ -17,7 +17,6 @@ func save_game(level_name: String):
 
 
 func load_game(level_name: String):
-	pass
 	_load_globals()
 	_load_level(level_name)
 
